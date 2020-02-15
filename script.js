@@ -1,6 +1,5 @@
 // particles does not use ES6, need to use standard functions
 // will call draw and continuously run the function
-let p; // initialize particle
 
 // init array of particles
 const particles = [];
@@ -8,7 +7,6 @@ const particles = [];
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     console.log(`width: ${width}`)
-    p = new Particle(); // create particle
     const particlesLength = Math.floor(window.innerWidth / 10)
 
     // iterate through all particles
@@ -18,10 +16,7 @@ function setup() {
 }
 
 function draw() {
-    background(55, 100, 144) // add background color to remove particle trail 
-    p.update()
-    // particle draw
-    p.draw();
+    background(55, 100, 144) // add background color to remove particle trail  
 
     particles.forEach((p, index) => {
         p.update();
@@ -29,13 +24,14 @@ function draw() {
         p.checkParticles(particles.slice(index)) // 
     })
 
+    // // THIS BLOCK WILL SHOW HOW POS COORDINATES SYNCS TO MOUSE
+    // // will draw a circle on mouse hover or press
     // if (mouseIsPressed) {
     //     console.log(mouseX, mouseY)
     //     fill(0)
     // } else {
     //     fill(100)
     // }
-
     // plug x and y mouse pos to track circle to mouse
     // circle(mouseX, mouseY, 80)
 }
@@ -57,7 +53,7 @@ class Particle {
 
     draw() {
         noStroke(); // no border
-        fill('rgba(255, 255, 255, 0.1)') // fill in color
+        fill('rgba(255, 255, 255, 0.3)') // fill in color
         circle(this.pos.x, this.pos.y, this.size); // draw circle by position and size
     }
 
@@ -79,7 +75,7 @@ class Particle {
 
             // create a line at a certain distance
             if (d < 120) { // if they are d apart, create a line
-                stroke('rgba(255, 255, 255, 0.1)')
+                stroke('rgba(255, 255, 255, 0.08)')
                 line(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y)
             }
         })
